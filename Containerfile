@@ -1,5 +1,5 @@
 # Based on fedora-bootc image
-FROM quay.io/fedora/fedora-bootc:latest
+FROM quay.io/fedora/fedora-iot:latest
 
 # Automatic Updates DNF
 RUN echo "" \
