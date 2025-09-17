@@ -1,13 +1,21 @@
 # Based on fedora-bootc image
 FROM quay.io/fedora/fedora-bootc:latest
 
-RUN mkdir -p /var/roothome /var/home /data
+#RUN mkdir -p /var/roothome /var/home /data
 
 # Automatic Updates DNF
 RUN echo "" \
  && sed -i 's|ExecStart=/usr/bin/bootc upgrade --apply --quiet|ExecStart=/usr/bin/bootc upgrade --quiet|' /usr/lib/systemd/system/bootc-fetch-apply-updates.service \
  && systemctl enable bootc-fetch-apply-updates.timer \
  && echo ""
+
+# 
+#RUN echo "" \
+# && dnf install -y fedora-release-ostree-desktop \
+# && dnf autoremove -y \
+# && dnf clean all \
+# && rm -rf /var/* /tmp/* \
+# && echo "" 
 
 # Tailscale
 RUN echo "" \
