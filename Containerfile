@@ -2,7 +2,7 @@
 FROM quay.io/fedora/fedora-bootc:latest
 #FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
-RUN mkdir -p /var/roothome /var/home /data
+#RUN mkdir -p /var/roothome /var/home /data
 
 # Automatic Updates DNF
 RUN echo "" \
@@ -53,7 +53,8 @@ RUN echo "" \
 
 RUN echo "" \
  && systemctl enable podman-auto-update.timer \
- && systemctl disable systemd-remount-fs.service \
+ && systemctl mask systemd-remount-fs.service \
+ && systemctl mask systemd-sysusers.service \
  && flatpak remotes \
  && echo ""
 
