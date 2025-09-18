@@ -1,7 +1,6 @@
 # Based on fedora-bootc image
 #FROM quay.io/fedora/fedora-bootc:latest
-#FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
-FROM quay.io/fedora-ostree-desktops/base-atomic
+FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 
 #RUN mkdir -p /var/roothome /var/home /data
 
