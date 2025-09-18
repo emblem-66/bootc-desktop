@@ -28,14 +28,6 @@ RUN echo "" \
  && rm -rf /var/* /tmp/* \
  && echo "" 
 
-# Flatpak
-RUN echo "" \
- && dnf install -y flatpak \
- && dnf autoremove -y \
- && dnf clean all \
- && rm -rf /var/* /tmp/* \
- && echo "" 
-
 # GNOME
 RUN echo "" \
  && dnf install -y \
@@ -49,6 +41,20 @@ RUN echo "" \
  && dnf clean all \
  && rm -rf /var/* /tmp/* \
  && echo "" 
+
+# Flatpak
+RUN echo "" \
+ && dnf install -y flatpak \
+ && dnf autoremove -y \
+ && dnf clean all \
+ && rm -rf /var/* /tmp/* \
+ && echo "" 
+
+RUN echo "" \
+ && systemctl enable podman-auto-update.timer \
+ && systemctl disable systemd-remount-fs.service \
+ && flatpak remotes \
+ && echo ""
 
 # Finish
 RUN echo "" \
