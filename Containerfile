@@ -30,18 +30,19 @@ FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 # && echo "" 
 
 # GNOME
-#RUN echo "" \
-# && dnf install -y \
-#    gnome-shell \
-#    gdm \
-#    nautilus \
-#    ptyxis \
-#    adw-gtk3-theme \
-# && systemctl set-default graphical.target \
-# && dnf autoremove -y \
-# && dnf clean all \
-# && rm -rf /var/* /tmp/* \
-# && echo "" 
+RUN echo "" \
+ && dnf install -y \
+    plymouth \
+    gdm \
+    gnome-shell \
+    nautilus \
+    ptyxis \
+    adw-gtk3-theme \
+ && systemctl set-default graphical.target \
+ && dnf autoremove -y \
+ && dnf clean all \
+ && rm -rf /var/* /tmp/* \
+ && echo "" 
 
 # COSMIC-EPOCH
 #RUN echo "" \
