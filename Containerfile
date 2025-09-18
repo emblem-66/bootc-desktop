@@ -43,6 +43,15 @@ FROM quay.io/fedora-ostree-desktops/base-atomic:rawhide
 # && rm -rf /var/* /tmp/* \
 # && echo "" 
 
+# COSMIC-EPOCH
+#RUN echo "" \
+# && dnf copr enable -y ryanabx/cosmic-epoch \
+# && dnf install -y cosmic-desktop \
+# && dnf autoremove -y \
+# && dnf clean all \
+# && rm -rf /var/* /tmp/* \
+# && echo ""
+
 # Flatpak
 #RUN echo "" \
 # && dnf install -y flatpak \
