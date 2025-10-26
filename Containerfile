@@ -5,6 +5,9 @@ COPY --chmod=755 build.sh /
 #FROM quay.io/fedora/fedora-bootc:latest
 FROM ghcr.io/emblem-66/bootc-base:latest
 
+# Check OS-Release
+RUN grep '^OSTREE_VERSION=' /usr/lib/os-release
+
 ### MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
