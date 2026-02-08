@@ -1,23 +1,18 @@
 FROM scratch AS ctx
-COPY --chmod=755 build.sh /
 
-# Base Image
-#FROM quay.io/fedora/fedora-bootc:latest
-FROM ghcr.io/emblem-66/bootc-base:latest
+#COPY --chmod=755 build*.sh /
+#COPY --chmod=755 build_files/*.sh /
+COPY --from=ghcr.io/emblem-66/bootc-config:latest build_files/ /
 
-# Check OS-Release
-RUN grep '^OSTREE_VERSION=' /usr/lib/os-release
+FROM quay.io/fedora/fedora-bootc:latest
 
-### MODIFICATIONS
-## make modifications desired in your image and install packages by modifying the build.sh script
-## the following RUN directive does all the things required to run "build.sh" as recommended.
+COPY --from=ghcr.io/emblem-66/bootc-config:latest system_files/ /
+COPY --from=ghcr.io/emblem-66/containers:latest system_files/ /
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build.sh
+    /ctx/build_files/build_desktop.sh
 
-### LINTING
-## Verify final image and contents are correct.
 RUN bootc container lint
